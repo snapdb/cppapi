@@ -1,0 +1,30 @@
+name: "Build"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --assume-yes build-essential cmake libboost-all-dev zlib1g-dev libbz2-dev
+
+    - name: Build library, samples and unit tests
+      run: |
+        cmake -S . -B build/ci -DCMAKE_BUILD_TYPE=Release
+        cmake --build build/ci --target snapdb samples UnitTests -j $(nproc)
+
+    - name: Run unit tests
+      working-directory: build/ci
+      run: ctest --output-on-failure

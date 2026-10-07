@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F706EB8B-6372-5B1B-A066-E91570D9E3DC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>snapdbcpp</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>snapdb.cpp</ProjectName>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros">
+    <!-- Boost defaults to a "boost" folder parallel to the API project folder, override with /p:BoostRoot=path -->
+    <BoostRoot Condition="'$(BoostRoot)' == ''">$(SolutionDir)..\..\boost</BoostRoot>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)..\build\output\$(PlatformTarget)\$(Configuration)\lib\</OutDir>
+    <IntDir>obj\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\build\output\$(PlatformTarget)\$(Configuration)\lib\</OutDir>
+    <IntDir>obj\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)..\build\output\$(PlatformTarget)\$(Configuration)\lib\</OutDir>
+    <IntDir>obj\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\build\output\$(PlatformTarget)\$(Configuration)\lib\</OutDir>
+    <IntDir>obj\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0601;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_ASIO_ENABLE_CANCELIO;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(BoostRoot)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0601;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_ASIO_ENABLE_CANCELIO;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(BoostRoot)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0601;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_ASIO_ENABLE_CANCELIO;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(BoostRoot)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0601;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_ASIO_ENABLE_CANCELIO;_SILENCE_FPOS_SEEKPOS_DEPRECATION_WARNING;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(BoostRoot)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CommonTypes.cpp" />
+    <ClCompile Include="Convert.cpp" />
+    <ClCompile Include="EndianConverter.cpp" />
+    <ClCompile Include="SnapException.cpp" />
+    <ClCompile Include="io\BinaryStream.cpp" />
+    <ClCompile Include="io\BufferStream.cpp" />
+    <ClCompile Include="io\SocketStream.cpp" />
+    <ClCompile Include="openhistorian\HistorianConnection.cpp" />
+    <ClCompile Include="openhistorian\HistorianKey.cpp" />
+    <ClCompile Include="openhistorian\HistorianKeyValueEncoder.cpp" />
+    <ClCompile Include="openhistorian\HistorianTypes.cpp" />
+    <ClCompile Include="openhistorian\HistorianValue.cpp" />
+    <ClCompile Include="openhistorian\MetadataCache.cpp" />
+    <ClCompile Include="pugixml.cpp" />
+    <ClCompile Include="snap\DatabaseInfo.cpp" />
+    <ClCompile Include="snap\EncodingDefinition.cpp" />
+    <ClCompile Include="snap\Filters.cpp" />
+    <ClCompile Include="snap\Library.cpp" />
+    <ClCompile Include="snap\ReaderOptions.cpp" />
+    <ClCompile Include="snap\SnapConnection.cpp" />
+    <ClCompile Include="snap\SnapTypes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommonTypes.h" />
+    <ClInclude Include="Convert.h" />
+    <ClInclude Include="EndianConverter.h" />
+    <ClInclude Include="SnapException.h" />
+    <ClInclude Include="Version.h" />
+    <ClInclude Include="io\BinaryStream.h" />
+    <ClInclude Include="io\BufferStream.h" />
+    <ClInclude Include="io\Encoding7Bit.h" />
+    <ClInclude Include="io\SocketStream.h" />
+    <ClInclude Include="io\Stream.h" />
+    <ClInclude Include="openhistorian\HistorianConnection.h" />
+    <ClInclude Include="openhistorian\HistorianKey.h" />
+    <ClInclude Include="openhistorian\HistorianKeyValueEncoder.h" />
+    <ClInclude Include="openhistorian\HistorianTypes.h" />
+    <ClInclude Include="openhistorian\HistorianValue.h" />
+    <ClInclude Include="openhistorian\MetadataCache.h" />
+    <ClInclude Include="pugiconfig.hpp" />
+    <ClInclude Include="pugixml.hpp" />
+    <ClInclude Include="snap\DatabaseInfo.h" />
+    <ClInclude Include="snap\EncodingDefinition.h" />
+    <ClInclude Include="snap\Filters.h" />
+    <ClInclude Include="snap\FixedSizeKeyValueEncoder.h" />
+    <ClInclude Include="snap\KeyValueEncoderBase.h" />
+    <ClInclude Include="snap\Library.h" />
+    <ClInclude Include="snap\ReaderOptions.h" />
+    <ClInclude Include="snap\SnapClientDatabase.h" />
+    <ClInclude Include="snap\SnapConnection.h" />
+    <ClInclude Include="snap\SnapTypes.h" />
+    <ClInclude Include="snap\TreeStream.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
