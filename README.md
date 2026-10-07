@@ -77,7 +77,7 @@ int main()
         const MetadataCachePtr& metadata = historian.Metadata();
 
         // Lookup measurements for a device
-        const DeviceRecordPtr device = metadata->LookupDeviceByAcronym("DELL_SUBSTATION");
+        const DeviceRecordPtr device = metadata->LookupDeviceByAcronym("TEST_STATION");
         const vector<uint64_t> pointIDs = MetadataCache::ToPointIDList(device->Measurements);
 
         // Read last minute of data
@@ -103,9 +103,9 @@ int main()
 Example output:
 
 ```
-109: DELL_SUBSTATION-FQ [FREQ] @ 2026-10-07 19:24:43.233 = 60.033 [Normal]
-112: DELL_SUBSTATION-PM1 [VPHM] @ 2026-10-07 19:24:43.233 = 300232.969 [Normal]
-113: DELL_SUBSTATION-PA1 [VPHA] @ 2026-10-07 19:24:43.233 = 45.309 [Normal]
+109: TEST_STATION-FQ [FREQ] @ 2026-10-07 12:00:00.033 = 60.001 [Normal]
+112: TEST_STATION-PM1 [VPHM] @ 2026-10-07 12:00:00.033 = 299850.125 [Normal]
+113: TEST_STATION-PA1 [VPHA] @ 2026-10-07 12:00:00.033 = 12.345 [Normal]
 ```
 
 Filters can also be constructed directly, e.g., to down-sample to one value per second:

@@ -592,8 +592,8 @@ void TestMetadataCache()
   <DeviceDetail>
     <NodeID>e7a5235d-fb6b-4d92-a4b1-1a1d3d6e2c5e</NodeID>
     <UniqueID>7b5e8a43-4b1e-4c1f-9f1a-2a0e6f5d3c21</UniqueID>
-    <Acronym>DELL_SUBSTATION</Acronym>
-    <Name>Dell Substation</Name>
+    <Acronym>TEST_STATION</Acronym>
+    <Name>Test Station</Name>
     <AccessID>235</AccessID>
     <ProtocolName>IEEE C37.118-2005</ProtocolName>
     <FramesPerSecond>30</FramesPerSecond>
@@ -603,29 +603,29 @@ void TestMetadataCache()
     <UpdatedOn>2026-10-07T12:00:00.12-04:00</UpdatedOn>
   </DeviceDetail>
   <MeasurementDetail>
-    <DeviceAcronym>DELL_SUBSTATION</DeviceAcronym>
+    <DeviceAcronym>TEST_STATION</DeviceAcronym>
     <ID>PPA:10</ID>
     <SignalID>a3c0a2b2-10ee-4a7c-8b2a-2a3e1c9d5f10</SignalID>
-    <PointTag>GPA_DELL:FREQ</PointTag>
-    <SignalReference>DELL_SUBSTATION-FQ</SignalReference>
+    <PointTag>GPA_TEST:FREQ</PointTag>
+    <SignalReference>TEST_STATION-FQ</SignalReference>
     <SignalAcronym>FREQ</SignalAcronym>
-    <Description>Dell Substation Frequency</Description>
+    <Description>Test Station Frequency</Description>
   </MeasurementDetail>
   <MeasurementDetail>
-    <DeviceAcronym>DELL_SUBSTATION</DeviceAcronym>
+    <DeviceAcronym>TEST_STATION</DeviceAcronym>
     <ID>PPA:11</ID>
     <SignalID>b3c0a2b2-10ee-4a7c-8b2a-2a3e1c9d5f11</SignalID>
-    <PointTag>GPA_DELL:VA</PointTag>
-    <SignalReference>DELL_SUBSTATION-PA1</SignalReference>
+    <PointTag>GPA_TEST:VA</PointTag>
+    <SignalReference>TEST_STATION-PA1</SignalReference>
     <SignalAcronym>VPHA</SignalAcronym>
     <Description>Voltage A Angle</Description>
   </MeasurementDetail>
   <MeasurementDetail>
-    <DeviceAcronym>DELL_SUBSTATION</DeviceAcronym>
+    <DeviceAcronym>TEST_STATION</DeviceAcronym>
     <ID>PPA:12</ID>
     <SignalID>c3c0a2b2-10ee-4a7c-8b2a-2a3e1c9d5f12</SignalID>
-    <PointTag>GPA_DELL:VM</PointTag>
-    <SignalReference>DELL_SUBSTATION-PM1</SignalReference>
+    <PointTag>GPA_TEST:VM</PointTag>
+    <SignalReference>TEST_STATION-PM1</SignalReference>
     <SignalAcronym>VPHM</SignalAcronym>
     <Description>Voltage A Magnitude</Description>
   </MeasurementDetail>
@@ -639,7 +639,7 @@ void TestMetadataCache()
   </MeasurementDetail>
   <PhasorDetail>
     <ID>1</ID>
-    <DeviceAcronym>DELL_SUBSTATION</DeviceAcronym>
+    <DeviceAcronym>TEST_STATION</DeviceAcronym>
     <Label>Voltage A</Label>
     <Type>V</Type>
     <Phase>A</Phase>
@@ -653,14 +653,14 @@ void TestMetadataCache()
     Check(metadata.MeasurementRecords().size() == 4, "measurement records parsed, invalid IDs skipped");
     Check(metadata.DeviceRecords().size() == 1 && metadata.PhasorRecords().size() == 1, "device and phasor records parsed");
 
-    const DeviceRecordPtr device = metadata.LookupDeviceByAcronym("dell_substation");
+    const DeviceRecordPtr device = metadata.LookupDeviceByAcronym("test_station");
     Check(device != nullptr && device->Measurements.size() == 3 && device->Phasors.size() == 1, "device lookup is case-insensitive with associated records");
     Check(device != nullptr && device->AccessID == 235 && ToString(device->Longitude) == "-84.32", "device fields parsed");
 
     const MeasurementRecordPtr frequency = metadata.LookupMeasurementByPointID(10);
     Check(frequency != nullptr && frequency->InstanceName == "PPA" && frequency->AsSignalType == SignalType::FREQ && frequency->Device == device, "measurement lookup by point ID");
-    Check(metadata.LookupMeasurementByPointTag("GPA_DELL:FREQ") == frequency, "measurement lookup by point tag");
-    Check(metadata.LookupMeasurementBySignalReference("DELL_SUBSTATION-FQ") == frequency, "measurement lookup by signal reference");
+    Check(metadata.LookupMeasurementByPointTag("GPA_TEST:FREQ") == frequency, "measurement lookup by point tag");
+    Check(metadata.LookupMeasurementBySignalReference("TEST_STATION-FQ") == frequency, "measurement lookup by signal reference");
     Check(metadata.LookupMeasurementBySignalID(ParseGuid("a3c0a2b2-10ee-4a7c-8b2a-2a3e1c9d5f10")) == frequency, "measurement lookup by signal ID");
 
     const PhasorRecordPtr phasor = metadata.PhasorRecords()[0];
@@ -670,11 +670,11 @@ void TestMetadataCache()
     Check(metadata.GetMeasurementsBySignalType(SignalType::STAT).size() == 1, "measurements by signal type");
     Check(metadata.GetMeasurementsBySignalType(SignalType::STAT, "PPA").empty(), "measurements by signal type filtered by instance");
     Check(metadata.GetMeasurementsByTextSearch("voltage").size() == 2, "measurements by text search");
-    Check(metadata.GetDevicesByTextSearch("dell", "PPA").size() == 1 && metadata.GetDevicesByTextSearch("dell", "STAT").empty(), "devices by text search filtered by instance");
+    Check(metadata.GetDevicesByTextSearch("station", "PPA").size() == 1 && metadata.GetDevicesByTextSearch("station", "STAT").empty(), "devices by text search filtered by instance");
     Check(MetadataCache::ToPointIDList(device->Measurements) == vector<uint64_t>{ 10, 11, 12 }, "point ID list");
 
     HistorianKey key(10, ParseTimestamp("2026-10-07 12:00:00"));
-    Check(key.ToString(metadata) == "10: DELL_SUBSTATION-FQ [FREQ] @ 2026-10-07 12:00:00.000", "key string with metadata: " + key.ToString(metadata));
+    Check(key.ToString(metadata) == "10: TEST_STATION-FQ [FREQ] @ 2026-10-07 12:00:00.000", "key string with metadata: " + key.ToString(metadata));
 }
 
 void TestConnectionArguments()
